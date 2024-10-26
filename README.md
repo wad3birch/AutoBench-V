@@ -1,7 +1,5 @@
 # AutoBench-V: Can Large Vision-Language Models Benchmark Themselves?
 
-## Framework Overview
-
 <div align="center">
 
 <div align="center">
@@ -20,6 +18,8 @@
     <img src="https://img.shields.io/badge/Toolkit-%F0%9F%92%A1-yellow?style=flat-square" alt="Toolkit" style="height:20px;"/>
   </a>
 </p>
+
+## Framework Overview
 
 ![autobench-v_09](figure/autobench-v_09.png)
 
