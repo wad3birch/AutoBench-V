@@ -45,5 +45,7 @@ __pypackages__/
 .env
 test.py
 
+*.png
 *.jpg
 *.jpeg
+*.csv
