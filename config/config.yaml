@@ -1,0 +1,335 @@
+user_input: 'spatial_understanding'
+
+aspect_count: 15
+
+questions_per_aspect: 100
+
+diffusion_model: 'flux_pro' 
+
+test_lvm: 'gpt4o'
+
+level: 'medium'
+
+lvm_set:
+  - gpt4o
+  - llava_1_6
+  - glm_v4
+  - claude_3_5_sonnet
+  - gemini_1_5_flash
+  - qwen_VL
+
+basic_understanding_prompt: |
+  [System]
+  You are an AI assistant specializing in designing prompts to test Large Vision-Language Models (LVLMs). Your task is to create meticulously {aspect_count} fined-grained aspects that evaluate LVLMs basic understanding of images.
+
+  [Background]
+  Large Vision-Language Models are AI systems capable of understanding and analyzing images. Testing these models across various competencies is crucial for assessing their performance, limitations, and potential biases. The aspects you create will be used to challenge and evaluate LVMs.
+
+  [Instruction]
+
+  1. Basic Understanding: This involves recognizing and identifying individual objects, characters, and scenes within an image.  It includes tasks like detecting the presence of specific items (e.g., cars, trees, people), distinguishing between different types of objects, and understanding the general context of the scene (e.g., a park, a city street).  The goal is to accurately label all relevant elements in the image, providing a foundation for more advanced analysis.
+  2. Come up with 4 general aspects according to the basic understanding.
+  3. Then Create 6 fined-grained aspects within the basic understanding for each general aspect, do not go beyond. You can consider the definition of the basic understanding above.
+  4. Please list the aspects without using numbered lists.
+  5. Let's think step by step.
+
+  [Output Format]
+  Please strictly respond in the following format:
+  General Aspect: [Aspect]
+    Fined-grained Aspect: [Aspect]
+    Introduction: [Introduction]
+
+spatial_understanding_prompt: |
+  [System]
+  You are an AI assistant specializing in designing prompts to test Large Vision-Language Models (LVLMs). Your task is to create meticulously {aspect_count} fined-grained aspects that evaluate LVLMs spatial understanding of images.
+
+  [Background]
+  Large Vision-Language Models are AI systems capable of understanding and analyzing images. Testing these models across various competencies is crucial for assessing their performance, limitations, and potential biases. The aspects you create will be used to challenge and evaluate LVMs.
+
+  [Instruction]
+  1. Spatial Understanding: This level of understanding focuses on the spatial arrangement and positioning of objects within the image.  It involves interpreting the two-dimensional and three-dimensional relationships between objects, such as determining which objects are in the foreground or background, understanding their relative sizes, and recognizing their orientations.  This also includes perceiving depth, estimating distances between objects, and understanding how objects interact with one another in the physical space depicted in the image.
+  2. Come up with 4 general aspects according to the spatial understanding.
+  3. Create 6 fined-grained aspects within the spatial understanding for each general aspect, do not go beyond. You can consider the definition of spatial understanding above.
+  4. Please list the aspects without using numbered lists.
+  5. Let's think step by step.
+
+  [Output Format]
+  Please strictly respond in the following format:
+  General Aspect: [Aspect]
+    Fined-grained Aspect: [Aspect]
+    Introduction: [Introduction]
+  
+semantic_understanding_prompt: |
+  [System]
+  You are an AI assistant specializing in designing prompts to test Large Vision-Language Models (LVLMs). Your task is to create meticulously {aspect_count} fined-grained aspects that evaluate LVLMs semantic understanding of images.
+
+  [Background]
+  Large Vision-Language Models are AI systems capable of understanding and analyzing images. Testing these models across various competencies is crucial for assessing their performance, limitations, and potential biases. The aspects you create will be used to challenge and evaluate LVMs.
+
+  [Instruction]
+  1. Semantic Understanding: This involves interpreting the higher-level meaning and relationships within the image.  It goes beyond mere object identification to understand the roles and interactions between objects.  For example, recognizing that a person is riding a bike, or that two people are engaged in a conversation.  This level of understanding captures the context and intent behind the scene, identifying not just what is present but how these elements relate to each other to form a coherent narrative or message.
+  2. Come up with 4 general aspects according to the Semantic understanding.
+  3. Create 6 fined-grained aspects within the Semantic understanding for each general aspect, do not go beyond. You can consider the definition of spatial understanding above.
+  4. Please list the aspects without using numbered lists.
+  5. Let's think step by step.
+
+  [Output Format]
+  Please strictly respond in the following format:
+  General Aspect: [Aspect]
+    Fined-grained Aspect: [Aspect]
+    Introduction: [Introduction]
+
+reasoning_capacity_prompt: |
+  [System]
+  You are an AI assistant specializing in designing prompts to test Large Vision-Language Models (LVLMs). Your task is to create meticulously {aspect_count} fined-grained aspects that evaluate LVLMs reasoning understanding based on images.
+
+  [Background]
+  Large Vision-Language Models are AI systems capable of understanding and analyzing images. Testing these models across various competencies is crucial for assessing their performance, limitations, and potential biases. The aspects you create will be used to challenge and evaluate LVMs.
+
+  [Instruction]
+  1. Reasoning Understanding: This involves interpreting and analyzing the relationships and logical connections between different elements within an image. It requires the ability to infer potential outcomes, understand causal relationships, and make predictions about what might happen next based on the visual cues. For example, reasoning might involve understanding that if a person is holding an umbrella and the sky is dark, it might rain soon. It also includes understanding more abstract relationships, such as social dynamics or the intent behind actions, and making judgments about what is likely or possible given the visual information.
+  2. Come up with 4 general aspects according to the reasoning abilities.
+  3. Create 5 fined-grained aspects within the reasoning abilities for each general aspects, do not go beyond. You can consider the definition of reasoning understanding above.
+  4. Please list the aspects without using numbered lists.
+  5. Let's think step by step.
+
+  [Output Format]
+  Please strictly respond in the following format:
+  General Aspect: [Aspect]
+    Fined-grained Aspect: [Aspect]
+    Introduction: [Introduction]
+
+atmospheric_understanding_prompt: |
+  [System]
+  You are an AI assistant specializing in designing prompts to test Large Vision-Language Models (LVLMs). Your task is to create meticulously 5 fined-grained aspects that evaluate LVLMs reasoning and understanding based on images.
+
+  [Background]
+  Large Vision-Language Models are AI systems capable of understanding and analyzing images. Testing these models across various competencies is crucial for assessing their performance, limitations, and potential biases. The aspects you create will be used to challenge and evaluate LVMs.
+
+  [Instruction]
+  1. Atmospheric Understanding: This level of understanding focuses on grasping the mood, tone, and emotional ambiance conveyed by an image. For instance, in an image where a group of children are laughing under warm sunlight in a lush park, the combination of their expressions, the bright colors, and the soft lighting creates a joyful and carefree atmosphere. Atmospheric understanding captures these subtle emotional cues, helping to interpret not just what is depicted or how elements are arranged, but how the scene feels and the emotional resonance it conveys to the viewer, without overlapping with the more analytical aspects of semantic or reasoning understanding.
+  2. Come up with 4 general aspects according to the Atmospheric Understanding.
+  3. Create 6 fined-grained aspects within the Atmospheric Understanding for each general aspect, do not go beyond. You can consider the definition of Atmospheric Understanding above.
+  4. Please list the aspects without using numbered lists.
+  5. Let's think step by step.
+
+  [Output Format]
+  Please strictly respond in the following format:
+  General Aspect: [Aspect]
+    Fined-grained Aspect: [Aspect]
+    Introduction: [Introduction]
+
+difficulty_control_image_prompt: |
+  [System]
+  You are an AI assistant tasked with converting user inputs and their descriptions into suitable prompts for a diffusion model. These prompts will generate images to test the capabilities of large vision language models (LVLMs).
+
+  [Background]
+  Large Vision Language Models (LVLMs) are AI systems proficient in interpreting and analyzing images. Evaluating these models across different competencies is essential to understanding their performance, limitations, and potential biases. The prompts you create will be used to generate images through diffusion models, which will then be used to challenge and evaluate LVLMs.
+
+  [Instruction]
+  1. Carefully follow the given aspect: {aspect}, its introduction: {introduction} and prompt generation guidance: {guidance}. 
+  2. Generate a suitable prompt based on the provided aspect and introduction for the diffusion model to create an image. Ensure that the prompt is composed of simple phrases, avoiding overly complex descriptions, and is clear enough. If you deem the description irrelevant to the test content, do not generate a related prompt.
+  3. Consider including elements that might be particularly challenging for LVMs, such as unusual combinations, abstract concepts, or subtle details.
+  4. We categorize the difficulty of prompts into easy, medium, and hard:
+  - Easy Difficulty: Generate images featuring a single, easily identifiable object placed against a plain or minimally detailed background. The descriptions should be highly explicit and direct, with no ambiguity or complexity, e.g., "a single red apple centered on a white background." The emphasis is on clarity, with the object isolated from any distracting elements, ensuring that the visual focus remains on the primary subject.
+  - Medium Difficulty: Create scenes where the primary objects are interacting with their environment in a straightforward manner. The scene can include multiple familiar objects and a recognizable setting, but the overall composition should remain clear and not overly complex. For example, "a steaming cup of coffee on a wooden table in a cozy, sunlit kitchen." The background and context should add a layer of realism without introducing intricate details or challenging perspectives.
+  - Hard Difficulty: Design descriptions that incorporate multiple elements interacting within a more complex and dynamic environment. Introduce varied perspectives, detailed textures, and nuanced lighting conditions to enhance the complexity of the scene. For example, "a cat's reflection in a rain-streaked window, with the city skyline illuminated by the setting sun in the background." The goal is to create a richly detailed scene that challenges the model's ability to render interactions, depth, and subtle variations in lighting and perspective.5. Provide one overarching topic word that encapsulates the essence of your description.
+  6. List 4-6 key words that are closely related to your description and crucial for understanding the image.
+  7. Avoid using the following words in your new description: {used_words_str}
+  8. The required difficulty level is: {level}
+  9. Please use clear and accurate words, clear logic flow, do not use too abstract words.
+    Word Choice:
+    Word choice matters. More specific synonyms work better in many circumstances. Instead of big, try tiny, huge, gigantic, enormous, or immense.
+    Plural words and Collective Nouns:
+    Plural words leave a lot to chance. Try specific numbers. "Three cats" is more specific than "cats." Collective nouns also work, “flock of birds” instead of "birds.”
+    Focus on What You Want:
+    It is better to describe what you want instead of what you don't want. If you ask for a party with “no cake,” your image will probably include a cake. 
+    Try to be clear about any context or details that are important to you. Think about:
+    Subject: person, animal, character, location, object
+    Medium: photo, painting, illustration, sculpture, doodle, tapestry
+    Environment: indoors, outdoors, on the moon, underwater, in the city
+    Lighting: soft, ambient, overcast, neon, studio lights
+    Color: vibrant, muted, bright, monochromatic, colorful, black and white, pastel
+    Mood: sedate, calm, raucous, energetic
+    Composition: portrait, headshot, closeup, birds-eye view
+    But don't write it directly in colon form, but express it normally in a sentence.
+    ]
+
+
+  [Output Format]
+  Please strictly respond in the following format:
+  Aspect: {aspect}
+  Prompt: [Your detailed image description]
+  Topic word: [One word that captures the essence of the description]
+  Key word: [Word1, Word2, Word3,...]
+
+tifa_question_prompt: |
+  Given the image descriptions:{description}, generate six questions (True/False or Multiple choice) with only one correct choice that verifies if the image description is correct.
+  Classify each concept into a type (object, human, animal, food, activity, attribute, counting, color, material, spatial, location, shape, other), and then generate a question for each type.
+
+  Here's some examples:
+  '''
+  Description: A man posing for a selfie in a jacket and bow tie.
+  Entities: man, selfie, jacket, bow tie
+  Activities: posing
+  Colors:
+  Counting:
+  Other attributes:
+  Questions and answers are below:
+  About man (human):
+  Q: is this a man?
+  Choices: yes, no
+  A: yes
+  Q: who is posing for a selfie?
+  Choices: man, woman, boy, girl
+  A: man
+  About selfie (activity):
+  Q: is the man taking a selfie?
+  Choices: yes, no
+  A: yes
+  Q: what type of photo is the person taking?
+  Choices: selfie, landscape, sports, portrait
+  A: selfie
+  About jacket (object):
+  Q: is the man wearing a jacket?
+  Choices: yes, no
+  A: yes
+  Q: what is the man wearing?
+  Choices:jacket, t-shirt, tuxedo, swearter
+  A: jacket
+  About bow tie (object):
+  Q: is the man wearing a bow tie?
+  Choices: yes, no
+  A: yes
+  Q: is the man wearing a bow tie or a neck tie?
+  Choices: bow tie, neck tie, cravat, bolo tie
+  A: bow tie
+  About posing (activity):
+  Q: is the man posing for the selfie?
+  Choices: yes, no
+  A: yes
+  Q: what is the man doing besides taking the selfie?
+  Choices: posing, waving, nothing, shaking
+  A: posing
+
+  Description: A horse and several cows feed on hay.
+  Entities: horse, cows, hay
+  Activities: feed on
+  Colors:
+  Counting: several
+  Other attributes:
+  Questions and answers are below:
+  About horse (animal):
+  Q: is there a horse?
+  Choices: yes, no
+  A: yes
+  About cows (animal):
+  Q: are there cows?
+  Choices: yes, no
+  A: yes
+  About hay (object):
+  Q: is there hay?
+  Choices: yes, no
+  A: yes
+  Q: what is the horse and cows feeding on?
+  Choices: hay, grass, leaves, twigs
+  A: hay
+  About feed on (activity):
+  Q: are the horse and cows feeding on hay?
+  Choices: yes, no
+  A: yes
+  About several (counting):
+  Q: are there several cows?
+  Choices: yes, no
+  A: yes
+  '''
+
+  And finally respond in the following format:
+  caption: {description}
+  question:
+  choices: [Choice1,
+            Choice2,
+            ...
+            ]
+  answer: 
+  element_type:
+  element:
+
+tifa_answer_prompt: |
+  Given the image below, answer the questions: {question} from the choice: {choices} based on the image.
+  And directly give the answer. respond in the following format:
+  answer: [Your answer here]
+
+rate_prompt: |
+  Based on the following question, image, prompt and answer. Let's think step by step. Please give a score on a scale of 1 to 10 and give a brief explanation. 
+  Please respond in the following format: 
+  Score: [Your score here]\nExplanation: [Your explanation here]
+  \n\nPrompt: {prompt}\n\nQuestion: {question}\nAnswer: {answer}
+
+objective_question_prompt: |
+  [System]
+  You are an AI assistant tasked with converting user inputs and their descriptions into suitable questions to test the Large Vision Model's (LVM) abilities in given aspects.
+
+  [Background]
+  Large Vision Models (LVMs) are AI systems proficient in interpreting and analyzing images. Evaluating these models across different competencies is essential to understanding their performance, limitations, and potential biases. We will provide you with a prompt to generate an image, which will create a specific image. You can then formulate questions about this image based on the prompt. The questions you create will be used to challenge and evaluate LVMs based on generated images.
+
+  [Instruction]
+  1. Carefully analyze the given aspect and its Introduction: Aspect:{aspect}.
+  2. Generate a suitable question based on the provided image and its generation prompt to test the LVM's ability in the given aspect below.
+  3. We categorize the difficulty of questions into easy, medium, and hard:
+    - Easy Difficulty:Focus on questions that require the identification of simple, prominent, and explicit details within the image. These questions should be straightforward, relying solely on basic observation without the need for inference or interpretation. For example, you might ask about the color of a specific object, the presence of a single item, or the shape of an easily recognizable feature. The key is to keep the questions direct and simple, ensuring that the answer is obvious and immediately visible in the image.
+    - Medium Difficulty:Design questions that necessitate a moderate level of observation and inference. These questions should involve understanding relationships between elements, recognizing interactions, or identifying less prominent features that are still clear but not immediately obvious. Examples could include questions about the relative position of objects, identifying an action taking place, or understanding the context of a scene. The goal is to require some level of thought beyond basic observation, challenging the model to understand the scene's composition or narrative without being overly complex.
+    - Hard Difficulty:Create questions that require the model to notice and interpret more detailed aspects of the image. These questions should involve recognizing multiple elements working together, understanding more complex interactions, or identifying details that are present but not immediately obvious. For example, you might ask about the positioning of objects relative to each other in a more crowded scene, subtle changes in lighting or color that affect the appearance of objects, or identifying an element that is not the main focus but still visible in the background. The aim is to challenge the model to go beyond surface-level details, but without making the task too abstract or overly difficult.
+  4. Avoid using overly complicated language or details unrelated to the image in the questions.
+  5. When generating problems of different difficulty, please combine the current specific aspect.
+  6. Due to potential discrepancies in image generation, we have detected the following errors: {elements}. Please avoid referencing these elements in your questions. If the prompt for generating the image does not describe in detail what the specific looks like, please do not ask related questions. For example, if the prompt mentions a forest with glowing plants but does not specify how many there are, please do not ask a question about counting the number of glowing plants.
+  7. The required difficulty level is: {level}
+  8. Please generate a multiple-choice question, which is four-option single-choice question.
+  9. The answers in the options need to be differentiated to a certain extent. There cannot be a situation where multiple options meet the requirements of the question. There can only be one answer that meets the question.
+
+  Image generation prompt: {prompt}
+  Aspect: {aspect}
+
+  [Output Format]
+  Please directly output the generated question in the following JSON format:
+  {{
+    "question": "[your question]",
+    "options": {{
+      "A": "[Option A]",
+      "B": "[Option B]",
+      "C": "[Option C]",
+      "D": "[Option D]"
+    }}
+    "reference_answer": "A or B or C or D"
+  }}
+  Without any other information and remember only one option in the reference answer.
+
+objective_answer_prompt: |
+  In order to test your ability with pictures, we have a question about {aspect} area. Please answerbased on your knowledge in this area and your understanding of pictures.
+  Given the image below, answer the questions: {question} based on the image.
+  Please give the final answer strictly follow the format [[A]] (Srtictly add [[ ]] to the choice, and the content in the brackets should be the choice such as A, B, C, D) and provide a brief explanation of your answer. Directly output your answer in this format and give a brief explanation.
+
+guidance_prompt: |
+  [System]
+  You are an advanced AI simulation assistant specializing in crafting precise prompts for image generation models.
+
+  [Instruction]
+  I will provide you with an aspect for image generation. Your task is to create a detailed instruction on how to incorporate this aspect into an image generation prompt. This instruction should guide an AI to produce a prompt that will result in a image.
+
+  Here are two examples to guide you:
+  - If the aspect is Foreground vs. Background, then the prompt should have what's in the foreground and what's in the background.
+  - If the aspect is Relative Size Estimation, then you need to include the size of one thing compared to another.
+
+  The aspect we'll focus on is: {aspect}, and the introduction is: {introduction}
+
+  When crafting your instruction, consider the following:
+  1. Be specific about how the aspect should be represented visually, similar to the examples provided.
+  2. Provide clear guidelines on how to balance different elements within the image.
+  3. Include tips on avoiding common pitfalls or misinterpretations related to this aspect.
+
+  Remember, the goal is to instruct an AI on creating a prompt that will generate a single, coherent image. Your instruction should be comprehensive enough to ensure the final prompt will produce a high-quality, well-integrated result.
+
+  [Output Format]
+  Aspect: {aspect}
+  Introduction: {introduction}
+  Guidance: [Provide your instruction directly, written in a clear, authoritative tone. Do not include any explanations, disclaimers, or additional commentary outside of the instruction itself. Similar to the example given above, do not divide it into sections.]

@@ -1,0 +1,1 @@
+from .azure_client import client, config
