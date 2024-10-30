@@ -3,17 +3,17 @@ import matplotlib.pyplot as plt
 import numpy as np
 from collections import defaultdict
 
-# 文件路径列表
+# file path
 file_paths = [
-    "/Users/wad3/Downloads/Research/visual_autobench/code/document/atmospheric_understanding/answers/easy_answers.json",
-    "/Users/wad3/Downloads/Research/visual_autobench/code/document/atmospheric_understanding/answers/medium_answers.json",
-    "/Users/wad3/Downloads/Research/visual_autobench/code/document/atmospheric_understanding/answers/hard_answers.json"
+    "document/atmospheric_understanding/answers/easy_answers.json",
+    "document/atmospheric_understanding/answers/medium_answers.json",
+    "document/atmospheric_understanding/answers/hard_answers.json"
 ]
 
-# 初始化数据结构存储分数
+# initialize data
 data = defaultdict(lambda: defaultdict(lambda: defaultdict(list)))
 
-# 读取每个json文件并提取数据
+# read data from json files
 for file_path in file_paths:
     with open(file_path, 'r', encoding='utf-8') as f:
         content = json.load(f)
@@ -24,14 +24,14 @@ for file_path in file_paths:
             subjective_score = entry["subjective_score"]
             data[model][level][aspect].append(subjective_score)
 
-# 计算每个aspect的平均分
+# calculate average scores
 average_scores = defaultdict(lambda: defaultdict(lambda: defaultdict(float)))
 for model, levels in data.items():
     for level, aspects in levels.items():
         for aspect, scores in aspects.items():
             average_scores[aspect][model][level] = np.mean(scores)
 
-# 画出柱状图，每个aspect画一张图
+# plot average scores
 for aspect, models in average_scores.items():
     plt.figure(figsize=(12, 8))
     num_models = len(models)
