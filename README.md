@@ -27,7 +27,7 @@
 
 ![autobench-v_09](figure/autobench-v_09.png)
 
-## File Structure
+## 📚 File Structure
 
 ```bash
 .
@@ -53,7 +53,7 @@
 
 `run_script.sh`: api to use.
 
-## Usage
+## :closed_book: Usage
 
 ```bash
 pip -r install requirements.txt
@@ -83,7 +83,7 @@ For a complete pipeline, you only need to use 7 kinds for `generate_type` in ord
 - `questions`: generate questions to test LVLMs
 - `answers`: answer questions and score
 
-## Citation
+## 🔎 Cite AutoBench-V
 
 ```
 @misc{bao2024autobenchvlargevisionlanguagemodels,
@@ -96,3 +96,7 @@ For a complete pipeline, you only need to use 7 kinds for `generate_type` in ord
       url={https://arxiv.org/abs/2410.21259}, 
 }
 ```
+
+## 📬 Contact
+
+If you have any questions, suggestions, or would like to collaborate, please feel free to reach out to us via email at [wad3ahhh@gmail.com](mailto:wad3ahhh@gmail.com)
