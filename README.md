@@ -23,7 +23,7 @@
 
 </div>
 
-## Framework Overview
+## 📖 Framework Overview
 
 ![autobench-v_09](figure/autobench-v_09.png)
 
