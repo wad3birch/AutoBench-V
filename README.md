@@ -82,3 +82,17 @@ For a complete pipeline, you only need to use 7 kinds for `generate_type` in ord
 - `alignment`: test the alignment of images and descriptions via VQA
 - `questions`: generate questions to test LVLMs
 - `answers`: answer questions and score
+
+## Citation
+
+```
+@misc{bao2024autobenchvlargevisionlanguagemodels,
+      title={AutoBench-V: Can Large Vision-Language Models Benchmark Themselves?}, 
+      author={Han Bao and Yue Huang and Yanbo Wang and Jiayi Ye and Xiangqi Wang and Xiuying Chen and Mohamed Elhoseiny and Xiangliang Zhang},
+      year={2024},
+      eprint={2410.21259},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV},
+      url={https://arxiv.org/abs/2410.21259}, 
+}
+```
