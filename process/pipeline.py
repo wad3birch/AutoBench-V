@@ -17,7 +17,7 @@ from tqdm.asyncio import tqdm_asyncio
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from tools.tifa import generate_and_evaluate_image
 from tools.diffusion_model import async_dalle_3, async_openjourney_v4, async_sdxl, async_stable_diffusion, async_stable_diffusion_3, async_flux_pro
-from tools.lvm_pool import async_gpt4o, async_gemini_1_5_flash, async_claude_3_5_sonnet, async_claude_3_haiku, async_glm_4v, async_gpt4o_mini, async_qwen_2_vl
+from tools.lvm_pool import async_gpt4o, async_gemini_1_5_flash, async_claude_3_5_sonnet, async_claude_3_haiku, async_glm_4v, async_gpt4o_mini
 
 async_diffusion_function = {
     "dalle_e_3": async_dalle_3,
@@ -35,7 +35,7 @@ async_lvm_function = {
     "claude_3_5_sonnet": async_claude_3_5_sonnet,
     "claude_3_haiku": async_claude_3_haiku,
     "glm_4v": async_glm_4v,
-    "qwen2_vl": async_qwen_2_vl
+    # "qwen2_vl": async_qwen_2_vl
 }
 
 lvm_func_to_name = {
@@ -45,7 +45,7 @@ lvm_func_to_name = {
     "async_claude_3_5_sonnet": "Claude-3.5-Sonnet",
     "async_claude_3_haiku": "Claude-3-Haiku",
     "async_glm_4v": "GLM-4v",
-    "async_qwen_2_vl":"Qwen2_VL"
+    # "async_qwen_2_vl":"Qwen2_VL"
 }
 
 async def load_config(config_file_path):

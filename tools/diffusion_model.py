@@ -202,12 +202,10 @@ async def async_flux_pro(prompt):
     )
     return output
 
+# async def main():
+#     prompt = "A busy city street at dawn, with a woman holding an umbrella walking on the pavement. Nearby, a car drives through a deep puddle, causing a large splash of water to drench the woman. The splashing water is mid-air, reflecting the early morning light, and the woman's expression is one of surprise and irritation. The scene also includes a street vendor setting up a stall, adding to the dynamic environment but keeping the focus on the primary action and reaction."
+#     print(await async_flux_pro(prompt))
 
-
-async def main():
-    prompt = "A busy city street at dawn, with a woman holding an umbrella walking on the pavement. Nearby, a car drives through a deep puddle, causing a large splash of water to drench the woman. The splashing water is mid-air, reflecting the early morning light, and the woman's expression is one of surprise and irritation. The scene also includes a street vendor setting up a stall, adding to the dynamic environment but keeping the focus on the primary action and reaction."
-    print(await async_flux_pro(prompt))
-
-if __name__ == "__main__":
-    asyncio.get_event_loop().run_until_complete(main())                  
+# if __name__ == "__main__":
+#     asyncio.get_event_loop().run_until_complete(main())                  
 
