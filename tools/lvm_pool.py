@@ -271,7 +271,7 @@ async def async_openai(query, image_file):
 async def async_llama_3_2(query, image_file):
     # Create an OpenAI client with your deepinfra token and endpoint
     openai = AsyncOpenAI(
-        api_key="e5DZoMGibbwXIWt1ZPOHm3h1XDsWuNUt",
+        api_key=os.getenv("DEEPINFRA_API_KEY"), 
         base_url="https://api.deepinfra.com/v1/openai",
     )
 
