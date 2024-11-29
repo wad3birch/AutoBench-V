@@ -45,6 +45,7 @@ lvm_func_to_name = {
     "async_claude_3_5_sonnet": "Claude-3.5-Sonnet",
     "async_claude_3_haiku": "Claude-3-Haiku",
     "async_glm_4v": "GLM-4v",
+    "asyn_llama_3_2":"LLAMA-3.2-90B",
     # "async_qwen_2_vl":"Qwen2_VL"
 }
 

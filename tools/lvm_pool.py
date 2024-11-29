@@ -268,7 +268,19 @@ async def async_openai(query, image_file):
         print(response.text)
         return ""
     
+async def async_llama_3_2(query, image_file):
+    # Create an OpenAI client with your deepinfra token and endpoint
+    openai = AsyncOpenAI(
+        api_key="e5DZoMGibbwXIWt1ZPOHm3h1XDsWuNUt",
+        base_url="https://api.deepinfra.com/v1/openai",
+    )
 
+    chat_completion = openai.chat.completions.create(
+        model="meta-llama/Llama-3.2-90B-Vision-Instruct",
+        messages=[{"role": "user", "content": query}],
+    )
+
+    return chat_completion.choices[0].message.content
 # async def main():
 #     prompt = """
 #   In order to test your ability with pictures, we have a question about Foreground vs. Background area. Please answerbased on your knowledge in this area and your understanding of pictures.
