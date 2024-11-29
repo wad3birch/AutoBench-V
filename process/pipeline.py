@@ -16,7 +16,7 @@ from tqdm.asyncio import tqdm_asyncio
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from tools.tifa import generate_and_evaluate_image
-from tools.diffusion_model import async_dalle_3, async_openjourney_v4, async_sdxl, async_stable_diffusion, async_stable_diffusion_3, async_flux_pro
+from tools.diffusion_model import async_dalle_3, async_openjourney_v4, async_sdxl, async_stable_diffusion, async_stable_diffusion_3, async_flux_pro, async_flux_1_1_pro
 from tools.lvm_pool import async_gpt4o, async_gemini_1_5_flash, async_claude_3_5_sonnet, async_claude_3_haiku, async_glm_4v, async_gpt4o_mini
 
 async_diffusion_function = {
@@ -25,7 +25,8 @@ async_diffusion_function = {
     "sdxl": async_sdxl,
     "stable_diffusion": async_stable_diffusion,
     "stable_diffusion_3": async_stable_diffusion_3,
-    "flux_pro": async_flux_pro
+    "flux_pro": async_flux_pro,
+    "flux_1_1_pro": async_flux_1_1_pro
 }
 
 async_lvm_function = {
@@ -238,7 +239,7 @@ async def generate_single_image(item, level, image_prompt_folder, retry_attempts
     for attempt in range(retry_attempts):
         try:
             prompt = "please generate a picture from the perspective of an observer" + prompt
-            image_url = await async_diffusion_function['flux_pro'](prompt)
+            image_url = await async_diffusion_function['flux_1_1_pro'](prompt)
             async with aiohttp.ClientSession(timeout=aiohttp.ClientTimeout(total=60)) as session:
                 image_folder = f'{image_prompt_folder}/extracted_images/{level}'
                 os.makedirs(image_folder, exist_ok=True)
@@ -251,7 +252,7 @@ async def generate_single_image(item, level, image_prompt_folder, retry_attempts
                     "image_url": image_url[0],
                     "image_path": os.path.abspath(image_path),
                     'level': level,
-                    'model': 'flux_pro'
+                    'model': 'flux_1_1_pro'
                 }
         except Exception as e:
             print(f"Attempt {attempt + 1} failed: {e}")
