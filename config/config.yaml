@@ -333,3 +333,52 @@ guidance_prompt: |
   Aspect: {aspect}
   Introduction: {introduction}
   Guidance: [Provide your instruction directly, written in a clear, authoritative tone. Do not include any explanations, disclaimers, or additional commentary outside of the instruction itself. Similar to the example given above, do not divide it into sections.]
+
+rewrite_prompt: |
+  [System]
+  You are an AI assistant tasked with rewriting prompts according to given instruction.
+
+  [Instruction]
+  1. I will provide an original description, corresponding questions and answers, and a target answer.
+  2. Your task is to rewrite this description so that the answer to the question is the target answer
+  3. Change only the part of the description that is the target of the question, not the rest of the description.
+
+  [Example]
+  Original Prompt: "A single modern skyscraper stands tall against a clear blue sky, reflecting sunlight in an urban setting. The skyscraper's glass fa\u00e7ade captures the surrounding cityscape, showing minimal detail in the background. The focus remains on the architectural design and height of the building."
+  Question1: "What is the main focus of the description of the skyscraper? A. The detailed cityscape in the background B. The architectural design and height of the building C. The busy urban setting D. The colorful lights of the skyscraper"
+  Answer1: "B"
+  Target Answer1: "C"
+  Question2: "What is the skyscraper reflecting? A. The sunlight B. The cityscape C. The blue sky D. The surrounding buildings"
+  Answer2: "A"
+  Target Answer2: "B"
+  Modified Prompt: "A single modern skyscraper stands tall against a clear blue sky, reflecting the cityspace. The skyscraper's glass fa\u00e7ade captures the surrounding cityscape, showing minimal detail in the background. The focus remains on the busy urban setting."
+
+  [Content]
+  original_prompt: {original_prompt}
+  content: {content}
+
+  [Output Format]
+  {{
+    "modified_prompt": "Your modified prompt here"
+  }}
+  
+pertubate_question_prompt: |
+  [system]
+  You are an ai assistant tasked with generating some basic questions based on the description.
+
+  [instruction]
+  - Generate 3 multiple choice questions (with four choices) based on the given picture description.
+  - The content of the queries should ideally be basic, such as simple queries about judgments about object properties, and relative relationship between objects.
+
+  [content]
+  description: {description}
+
+  [Output Format]
+  [
+    {{
+      "question": "Your question here, A. [Option A] B. [Option B] C. [Option C] D. [Option D]",
+      "answer": "A or B or C or D"
+    }},
+    ...
+  ]
+  

@@ -18,6 +18,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from tools.tifa import generate_and_evaluate_image
 from tools.diffusion_model import async_dalle_3, async_openjourney_v4, async_sdxl, async_stable_diffusion, async_stable_diffusion_3, async_flux_pro, async_flux_1_1_pro
 from tools.lvm_pool import async_gpt4o, async_gemini_1_5_flash, async_claude_3_5_sonnet, async_claude_3_haiku, async_glm_4v, async_gpt4o_mini
+from tools.prediction import calculate_next_token_probability
 
 async_diffusion_function = {
     "dalle_e_3": async_dalle_3,
@@ -730,6 +731,116 @@ async def ablation_study(user_input):
         
         await save_json(avg_scores, scores_file)
         print(f'{level} scores for ablation study generated and saved successfully!')
+
+async def prediction_single(item):
+    questions = item['pertubation_Q&A']
+    for question in questions:
+        question_text = question['question']
+        answer = question['answer']
+        probability_dict = calculate_next_token_probability(question_text,possible_answers=['A','B','C','D'])
+        question['answer_probability'] = probability_dict
+        min_option = min(probability_dict, key=probability_dict.get)
+        # calculate the sum of the probability of the three wrong options
+        sum_probability = sum([probability_dict[option] for option in probability_dict if option != answer])
+        # if the probability of the correct answer is less than the sum of the probability of the three wrong options, then the question needs pertubation
+        if min_option != question['answer'] and probability_dict[answer] > sum_probability:
+            question['need_pertubation'] = True
+            question['pertubation_answer'] = min_option
+        else: question['need_pertubation'] = False
+    return item
+
+async def prediction(user_input):
+    # for level in ['easy', 'medium', 'hard']:
+    for level in ['easy']:
+        # with open(f'./document/{user_input}/questions/{level}_pertubation_questions.json', 'r') as file:
+        with open('document/pertubation_questions.json', 'r') as file:
+            data = json.load(file)
+        tasks = []
+        for item in data[:10]:
+            task = asyncio.create_task(prediction_single(item))
+            tasks.append(task)
+
+        save_data = await tqdm_asyncio.gather(*tasks)
+        save_data = [data for data in save_data if data is not None]
+        # save_file = f'./document/{user_input}/questions/{level}_pertubation_questions.json'
+        save_file = f'./document/pertubation_prediction.json'
+        await save_json(save_data, save_file)
+        print(f'{level} questions for pertubation generated and saved successfully!')   
+
+async def rewrite_single(item):
+    config = await load_config('config/config.yaml')
+    rewrite_template = config.get(f'rewrite_prompt')
+    # question = item['objective_question']
+    # reference_answer = item['objective_reference_answer']
+    original_prompt = item['prompt']
+    # target = item['pertubation_answer']
+    content = []
+    item['pertubation_Q&A'] = [item for item in item['pertubation_Q&A'] if item['need_pertubation']]
+    if item['pertubation_Q&A'] == []:
+        return None
+    for question in item['pertubation_Q&A']:
+        #如果need pertubation三个都是false就不用pertubation
+        content.append(["Question: " + question['question'], "Answer: " + question['answer'], "Target Answer: " + question['pertubation_answer']])
+    # rewrite_prompt = rewrite_template.format(original_prompt=original_prompt, question=question, answer=reference_answer, target_answer=target)
+    rewrite_prompt = rewrite_template.format(original_prompt=original_prompt, content=content)
+    rewrite_response = await async_gpt4o(rewrite_prompt)
+    rewrite_response = re.sub(r"```json(.*?)```", r"\1", rewrite_response, flags=re.DOTALL).strip()
+    item['modified_prompt'] = json.loads(rewrite_response)['modified_prompt']
+    return item
+
+async def rewrite(user_input):
+    for level in ['easy']:
+        # with open(f'./document/{user_input}/questions/{level}_pertubation_questions.json', 'r') as file:
+        with open('document/pertubation_prediction.json', 'r') as file:
+            data = json.load(file)
+        tasks = []
+        for item in data:
+            task = asyncio.create_task(rewrite_single(item))
+            tasks.append(task)
+
+        save_data = await tqdm_asyncio.gather(*tasks)
+        save_data = [data for data in save_data if data is not None]
+        # save_file = f'./document/{user_input}/questions/{level}_modified_questions.json'
+        save_file = f'./document/pertubation_modified.json'
+        await save_json(save_data, save_file)
+        print(f'{level} questions for pertubation generated and saved successfully!')   
+    print('easy questions rewrited successfully!')
+
+async def pertubation_single_question(item):
+    prompt = item['prompt']
+    with open('config/config.yaml', 'r') as file:
+        config = yaml.safe_load(file)
+    pertubation_question_template = config.get('pertubate_question_prompt')
+    pertubation_question_prompt = pertubation_question_template.format(description=prompt)
+    retry_attempts = 3
+    for attempt in range(retry_attempts):
+        try:
+            pertubation_question_response = await async_gpt4o(pertubation_question_prompt)
+            pertubation_question_response = re.sub(r"```json(.*?)```", r"\1", pertubation_question_response, flags=re.DOTALL).strip()
+            print(pertubation_question_response)
+            pertubation_question_response = json.loads(pertubation_question_response)
+            item['pertubation_Q&A'] = pertubation_question_response
+            return item
+        except Exception as e:
+            print(f"Attempt {attempt + 1} failed: {e}")
+            if attempt == retry_attempts - 1:
+                return None
+
+async def pertubation_question(user_input):
+    for level in ['easy', 'medium', 'hard']:
+        with open(f'./document/{user_input}/prompts/{level}_{user_input}_image_prompts.json', 'r') as file:
+            data = json.load(file)
+        tasks = []
+        for item in data:
+            task = asyncio.create_task(pertubation_single_question(item))
+            tasks.append(task)
+
+        save_data = await tqdm_asyncio.gather(*tasks)
+        save_data = [data for data in save_data if data is not None]
+        save_file = f'./document/{user_input}/questions/{level}_pertubation_questions.json'
+        await save_json(save_data, save_file)
+        print(f'{level} questions for pertubation generated and saved successfully!')   
+    print('easy questions rewrited successfully!')
 
 if __name__ == '__main__':
     user_input = 'basic_understanding'
