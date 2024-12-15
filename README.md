@@ -25,6 +25,8 @@
 
 ## 📖 Framework Overview
 
+![pie](figure/pie.png)
+
 ![autobench-v_09](figure/autobench-v_09.png)
 
 ## 📚 File Structure
@@ -69,7 +71,7 @@ five options for `user_input`:
 - `spatial_understanding`
 - `semantic_understanding`
 - `reasoning_capacity`
-- `atmosphere_understanding`
+- `atmospheric_understanding`
 
 
 
