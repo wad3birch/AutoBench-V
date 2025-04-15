@@ -101,4 +101,4 @@ For a complete pipeline, you only need to use 7 kinds for `generate_type` in ord
 
 ## 📬 Contact
 
-If you have any questions, suggestions, or would like to collaborate, please feel free to reach out to us via email at [wad3ahhh@gmail.com](mailto:wad3ahhh@gmail.com)
+If you have any questions, suggestions, or would like to collaborate, please feel free to reach out to us via email at [hbao@nd.edu](mailto:hbao@nd.edu)
