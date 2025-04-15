@@ -78,20 +78,20 @@ five options for `user_input`:
 For a complete pipeline, you only need to use 7 kinds for `generate_type` in order:
 
 - `aspect`: generate aspects
-- `guideline` : generate guidelines
 - `prompts`: generate image descriptions 
 - `images`: generate images based on description 
 - `alignment`: test the alignment of images and descriptions via VQA
 - `questions`: generate questions to test LVLMs
+- `adjust`: adjust the option distribution of questions
 - `answers`: answer questions and score
 
 ## 🔎 Cite AutoBench-V
 
 ```
-@misc{bao2024autobenchvlargevisionlanguagemodels,
+@misc{bao2025autobenchvlargevisionlanguagemodels,
       title={AutoBench-V: Can Large Vision-Language Models Benchmark Themselves?}, 
-      author={Han Bao and Yue Huang and Yanbo Wang and Jiayi Ye and Xiangqi Wang and Xiuying Chen and Mohamed Elhoseiny and Xiangliang Zhang},
-      year={2024},
+      author={Han Bao and Yue Huang and Yanbo Wang and Jiayi Ye and Xiangqi Wang and Xiuying Chen and Yue Zhao and Tianyi Zhou and Mohamed Elhoseiny and Xiangliang Zhang},
+      year={2025},
       eprint={2410.21259},
       archivePrefix={arXiv},
       primaryClass={cs.CV},
